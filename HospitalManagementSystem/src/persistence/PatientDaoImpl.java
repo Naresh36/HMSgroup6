@@ -84,7 +84,9 @@ public class PatientDaoImpl implements PatientDao {
 	@Override
 	public List<Doctor> doctorList() {
 		List<Doctor> doctors=new ArrayList<>();
+		
 		Statement statement=null;
+		
 		try(Connection connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/wileyc233","root","wiley");){
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			statement=connection.createStatement();
