@@ -43,3 +43,13 @@ INSERT INTO `hospital_maanagement`.`patient_history` (`id`, `doctor_id`, `patien
 INSERT INTO `hospital_maanagement`.`patient_history` (`id`, `doctor_id`, `patient_id`) VALUES ('408', '101', '508');
 INSERT INTO `hospital_maanagement`.`patient_history` (`id`, `doctor_id`, `patient_id`) VALUES ('409', '101', '509');
 INSERT INTO `hospital_maanagement`.`patient_history` (`id`, `doctor_id`, `patient_id`) VALUES ('410', '105', '510');
+
+
+INSERT INTO `hospital_maanagement`.`appointment` (`id`, `patient_id`, `doctor_id`, `slot_id`) VALUES ('601', '501', '101', '290');
+INSERT INTO `hospital_maanagement`.`appointment` (`id`, `patient_id`, `doctor_id`, `slot_id`) VALUES ('602', '502', '104', '291');
+INSERT INTO `hospital_maanagement`.`appointment` (`id`, `patient_id`, `doctor_id`, `slot_id`) VALUES ('603', '503', '102', '292');
+INSERT INTO `hospital_maanagement`.`appointment` (`id`, `patient_id`, `doctor_id`, `slot_id`) VALUES ('604', '504', '103', '293');
+INSERT INTO `hospital_maanagement`.`appointment` (`id`, `patient_id`, `doctor_id`, `slot_id`) VALUES ('605', '505', '105', '294');
+INSERT INTO `hospital_maanagement`.`appointment` (`id`, `patient_id`, `doctor_id`, `slot_id`) VALUES ('606', '506', '101', '295');
+INSERT INTO `hospital_maanagement`.`appointment` (`id`, `patient_id`, `doctor_id`, `slot_id`) VALUES ('607', '507', '104', '296');
+INSERT INTO `hospital_maanagement`.`appointment` (`id`, `patient_id`, `doctor_id`, `slot_id`) VALUES ('608', '508', '102', '297');
