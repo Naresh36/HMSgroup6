@@ -1,7 +1,9 @@
 package presentation;
+import persistence.*;
 import java.util.Scanner;
 public class DoctorPatientPresentationImpl implements DoctorPatientPresentation {
 	DoctorPatientPresentationImpl docPatPres=new DoctorPatientPresentationImpl();
+	PatientDaoImpl patientDaoImpl=new PatientDaoImpl();
 	@Override
 	public void showMenu() {
 		System.out.println("Are you a Doctor or Patient ?");
@@ -13,12 +15,14 @@ public class DoctorPatientPresentationImpl implements DoctorPatientPresentation 
 		@Override
 	public void showDoctorMenu() {
 			System.out.println("1.GetMySchedule");
+			System.out.println("1.GetMySchedule");
 			System.out.println("2.Get All Doctors Schedule");
 			System.out.println("3.Display Slots of Patient ");
 			System.out.println("4.Exit");		
 	}
 	@Override
 	public void showPatientMenu() {
+		System.out.println("Enter Your Choice:");
 		System.out.println("1.Registration of Patient");
 		System.out.println("2.Get All Doctors Schedule");
 		System.out.println("3.Get Available Slots of Doctor ");
@@ -28,14 +32,14 @@ public class DoctorPatientPresentationImpl implements DoctorPatientPresentation 
 	@Override
 	public void performMenu(int choice) {
 		Scanner scanner=new Scanner(System.in);
-		 choice=scanner.nextInt();
+		choice=scanner.nextInt();
 		switch(choice)
 		{
 		case 1:docPatPres.showDoctorMenu();
-		       docPatPres.performDoctorMenu(doctorchoice);
+		       docPatPres.performDoctorMenu(scanner.nextInt());
 				break;
 		case 2:docPatPres.showPatientMenu();
-		        docPatPres.performPatientMenu(patientchoice);
+		        docPatPres.performPatientMenu(scanner.nextInt());
 				break;
 		case 3:System.out.println("Thanks for using Hospital Management System");
 				System.exit(0);
@@ -44,13 +48,27 @@ public class DoctorPatientPresentationImpl implements DoctorPatientPresentation 
 		}
 		
 	}
-
 	@Override
 	public void performDoctorMenu(int doctorchoice) {
+		Scanner scanner=new Scanner(System.in);
+		doctorchoice=scanner.nextInt();
+		switch(doctorchoice)
+		{
+		case 1:System.out.println("Please Enter Details for Registration");
+		       patientDaoImpl.patientRegistration(null);
+			
+		
+		}
 		
 	}
 	@Override
 	public void performPatientMenu(int patientchoice) {
+		Scanner scanner=new Scanner(System.in);
+		patientchoice=scanner.nextInt();
+		switch(patientchoice)
+		{
+		
+		}
 	}
 
 }
