@@ -1,7 +1,7 @@
 package persistence;
 import entity.*;
 import java.util.*;
-import java.util.*;
+
 public interface DoctorDao {
 	List<Doctor> getAllSchedule();
 	Doctor getScheduleById(int id);
