@@ -3,6 +3,7 @@ import entity.*;
 import java.util.*;
 public interface PatientDao {
 	boolean patientRegistration(Patient patient);
-	List<Appointment> getSlots();
-	boolean selectAppointment(int slotId);
+	List<Doctor> doctorList();
+	List<Appointment> getSlots(int doctorId);
+	boolean selectAppointment(int slotId,int patientid);
 }

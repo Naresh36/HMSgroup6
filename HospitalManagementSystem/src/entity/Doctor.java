@@ -14,7 +14,7 @@ public class Doctor {
 	private int doctorAge;
 	private String doctorGender;
 	private String doctorSpecialization;
-	private int doctorContactNo;
+	private String doctorContactNo;
 	
 	
 
