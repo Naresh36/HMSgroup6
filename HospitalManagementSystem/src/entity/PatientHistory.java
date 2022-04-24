@@ -8,7 +8,6 @@ public class PatientHistory {
 	private int patient_history_id;
 	private String patient_history_issue;
 	private LocalDate localDate;
-	
 	private String patient_checkup_status;
 	
 	
