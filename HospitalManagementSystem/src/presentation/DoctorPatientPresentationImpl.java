@@ -10,6 +10,7 @@ public class DoctorPatientPresentationImpl implements DoctorPatientPresentation 
 		System.out.println("1. Doctor");
 		System.out.println("2. Patient");
 		System.out.println("3. Exit");
+		
 
 	}
 		@Override
@@ -56,6 +57,7 @@ public class DoctorPatientPresentationImpl implements DoctorPatientPresentation 
 		{
 		case 1:System.out.println("Please Enter Details for Registration");
 		       patientDaoImpl.patientRegistration(null);
+		       break;
 			
 		
 		}
