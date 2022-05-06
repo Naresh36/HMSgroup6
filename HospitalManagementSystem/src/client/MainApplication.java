@@ -9,7 +9,8 @@ public class MainApplication {
 
 		PatientPresentation patientPresentation = new PatientPresentationImpl();
 		
-		patientPresentation.loginOrRegister();
+//		patientPresentation.loginOrRegister();
+		patientPresentation.getDoctorsList();
 	}
 
 }

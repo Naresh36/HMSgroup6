@@ -1,7 +1,9 @@
 package presentation;
 
+import java.util.List;
 import java.util.Scanner;
 
+import entity.Doctor;
 import entity.Patient;
 import service.PatientService;
 import service.PatientServiceImpl;
@@ -26,6 +28,15 @@ public class PatientPresentationImpl implements PatientPresentation {
 		if(patientService.registration(patient))
 			System.out.println("registration sucessful");
 		else System.out.println("couldn't register!");
+	}
+	@Override
+	public void getDoctorsList() {
+		List<Doctor> list=patientService.doctorsList();
+		System.out.println("Here is the list of Doctors : ");
+		for(Doctor d: list) {
+			System.out.println(d);
+		}
+		
 	}
 
 }

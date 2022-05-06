@@ -18,7 +18,7 @@ public class PatientDaoImpl implements PatientDao {
 		
 		PreparedStatement preparedStatement=null;
 		int rows=0;
-		try(Connection connection= DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital_maagement","root","root");){
+		try(Connection connection= DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital_maagement","root","wiley");){
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			preparedStatement=connection.prepareStatement("insert into patient(name, age, gender) values(?,?,?)");
 //			preparedStatement.setInt(1, patient.getPatientId());
@@ -87,7 +87,7 @@ public class PatientDaoImpl implements PatientDao {
 		
 		Statement statement=null;
 		
-		try(Connection connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/wileyc233","root","wiley");){
+		try(Connection connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital_maagement","root","wiley");){
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			statement=connection.createStatement();
 			ResultSet resultSet=statement.executeQuery("select * from doctor");
