@@ -15,10 +15,12 @@ public class Patient {
 	private int patientAge;
 	private String patientGender;
 	private int patientHistoryId;
-	
-	
-
-	
+	public Patient(String patientName, int patientAge, String patientGender) {
+		super();
+		this.patientName = patientName;
+		this.patientAge = patientAge;
+		this.patientGender = patientGender;
+	}
 	
 	
 }

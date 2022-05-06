@@ -18,13 +18,13 @@ public class PatientDaoImpl implements PatientDao {
 		
 		PreparedStatement preparedStatement=null;
 		int rows=0;
-		try(Connection connection= DriverManager.getConnection("jdbc:mysql://localhost:3306/wileyc233","root","wiley");){
+		try(Connection connection= DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital_maagement","root","root");){
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			preparedStatement=connection.prepareStatement("insert into patient values(?,?,?,?)");
-			preparedStatement.setInt(1, patient.getPatientId());
-			preparedStatement.setString(2,patient.getPatientName());
-			preparedStatement.setInt(3, patient.getPatientAge());
-			preparedStatement.setString(4, patient.getPatientGender());
+			preparedStatement=connection.prepareStatement("insert into patient(name, age, gender) values(?,?,?)");
+//			preparedStatement.setInt(1, patient.getPatientId());
+			preparedStatement.setString(1,patient.getPatientName());
+			preparedStatement.setInt(2, patient.getPatientAge());
+			preparedStatement.setString(3, patient.getPatientGender());
 			rows=preparedStatement.executeUpdate();
 		}
 		catch(Exception e) {
