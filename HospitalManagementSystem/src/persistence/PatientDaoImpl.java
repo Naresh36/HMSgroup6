@@ -10,6 +10,7 @@ import java.util.List;
 import entity.Appointment;
 import entity.Doctor;
 import entity.Patient;
+import static persistence.ConnectionDetails.*;
 
 public class PatientDaoImpl implements PatientDao {
 
@@ -18,7 +19,7 @@ public class PatientDaoImpl implements PatientDao {
 		
 		PreparedStatement preparedStatement=null;
 		int rows=0;
-		try(Connection connection= DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital_maagement","root","wiley");){
+		try(Connection connection= DriverManager.getConnection(jdbcConnection, jdbcUser, jdbcPassword);){
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			preparedStatement=connection.prepareStatement("insert into patient(name, age, gender) values(?,?,?)");
 //			preparedStatement.setInt(1, patient.getPatientId());
@@ -41,7 +42,7 @@ public class PatientDaoImpl implements PatientDao {
 		
 		List<Appointment> slots=new ArrayList<>();
 		Statement statement=null;
-		try(Connection connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/wileyc233","root","wiley");){
+		try(Connection connection=DriverManager.getConnection(jdbcConnection, jdbcUser, jdbcPassword);){
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			statement=connection.createStatement();
 			ResultSet resultSet=statement.executeQuery("select id,doctor_id,slot_id from appointment where doctor_id ="+doctorId+" and patient_id is null");
@@ -65,7 +66,7 @@ public class PatientDaoImpl implements PatientDao {
 //		Patient patient=new Patient();
 		int rows=0;
 		PreparedStatement statement=null;
-		try(Connection connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/wileyc233","root","wiley");){
+		try(Connection connection=DriverManager.getConnection(jdbcConnection, jdbcUser, jdbcPassword);){
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			statement=connection.prepareStatement("update appointment set patient_id =? where slot_id=?");
 			statement.setInt(1,patientid);
@@ -87,7 +88,7 @@ public class PatientDaoImpl implements PatientDao {
 		
 		Statement statement=null;
 		
-		try(Connection connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital_maagement","root","wiley");){
+		try(Connection connection=DriverManager.getConnection(jdbcConnection, jdbcUser, jdbcPassword);){
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			statement=connection.createStatement();
 			ResultSet resultSet=statement.executeQuery("select * from doctor");

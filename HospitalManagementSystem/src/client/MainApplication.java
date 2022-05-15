@@ -8,8 +8,7 @@ public class MainApplication {
 	public static void main(String[] args) {
 
 		PatientPresentation patientPresentation = new PatientPresentationImpl();
-		
-//		patientPresentation.loginOrRegister();
+		patientPresentation.loginOrRegister();
 		patientPresentation.getDoctorsList();
 	}
 

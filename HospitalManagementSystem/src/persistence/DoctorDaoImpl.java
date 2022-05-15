@@ -13,6 +13,7 @@ import java.sql.Time;
 import entity.Appointment;
 import entity.Doctor;
 import entity.Slot;
+import static persistence.ConnectionDetails.*;
 
 public class DoctorDaoImpl implements DoctorDao {
 
@@ -20,7 +21,7 @@ public class DoctorDaoImpl implements DoctorDao {
 	public List<Appointment> getAllSchedule() {
 		List<Appointment> appointments=new ArrayList<Appointment>();
 		Statement statement=null;
-		try(Connection connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/wileyc233","root","wiley");){
+		try(Connection connection=DriverManager.getConnection(jdbcConnection, jdbcUser, jdbcPassword);){
 			statement=connection.createStatement();
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			ResultSet resultSet=statement.executeQuery("select * from appointment");
@@ -53,7 +54,7 @@ public class DoctorDaoImpl implements DoctorDao {
 		List<Slot> slots=new ArrayList<Slot>();
 //		Connection connection=null;
 		Statement statement=null;
-		try(Connection connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/wileyc233","root","wiley");){
+		try(Connection connection=DriverManager.getConnection(jdbcConnection, jdbcUser, jdbcPassword);){
 			statement=connection.createStatement();
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			ResultSet resultSet=statement.executeQuery("select * from slot");
@@ -79,7 +80,7 @@ public class DoctorDaoImpl implements DoctorDao {
 	public boolean selectSlots(int[] arr,int doctorId) {
 		int rows=0;
 		PreparedStatement statement=null;
-		try(Connection connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/wileyc233","root","wiley");){
+		try(Connection connection=DriverManager.getConnection(jdbcConnection, jdbcUser, jdbcPassword);){
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			for(int i=0;i<arr.length;i++) {
 				statement=connection.prepareStatement("update appointment set slot_id =? where doctor_id=?");
