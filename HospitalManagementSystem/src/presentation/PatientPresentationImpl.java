@@ -80,8 +80,7 @@ public class PatientPresentationImpl implements PatientPresentation {
 	public void showMenu() {
 		loginOrRegister();
 		System.out.println("1. Get doctors list");
-		System.out.println("2. My History:");
-		System.out.println("3. Exit");
+		System.out.println("2. Exit");
 	}
 	@Override
 	public void performChoice(int choice) {
@@ -89,10 +88,7 @@ public class PatientPresentationImpl implements PatientPresentation {
 		{
 		case 1:getDoctorsList();
 				break;
-		case 2:
-				System.out.println("still in developing phase");
-				break;
-		case 3: System.exit(0);
+		case 2: System.exit(0);
 		default:System.out.println("Invalid Choice");
 			
 		}
