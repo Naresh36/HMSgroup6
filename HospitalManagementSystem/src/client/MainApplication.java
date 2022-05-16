@@ -1,15 +1,20 @@
 package client;
 
-import presentation.PatientPresentation;
-import presentation.PatientPresentationImpl;
+import java.util.Scanner;
+
+import presentation.DoctorPatientPresentation;
+import presentation.DoctorPatientPresentationImpl;
 
 public class MainApplication {
 
 	public static void main(String[] args) {
 
-		PatientPresentation patientPresentation = new PatientPresentationImpl();
-		patientPresentation.loginOrRegister();
-		patientPresentation.getDoctorsList();
+		DoctorPatientPresentation doctorPatientPresentation = new DoctorPatientPresentationImpl();
+		Scanner scanner = new Scanner(System.in);
+		while(true) {
+			doctorPatientPresentation.showMenu();
+			int x = scanner.nextInt();
+			doctorPatientPresentation.performChoice(x);
+		}
 	}
-
 }

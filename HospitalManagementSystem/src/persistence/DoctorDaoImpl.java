@@ -1,19 +1,21 @@
 package persistence;
 
+import static persistence.ConnectionDetails.jdbcConnection;
+import static persistence.ConnectionDetails.jdbcPassword;
+import static persistence.ConnectionDetails.jdbcUser;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.sql.Statement;
 import java.sql.Time;
+import java.util.ArrayList;
+import java.util.List;
 
 import entity.Appointment;
-import entity.Doctor;
 import entity.Slot;
-import static persistence.ConnectionDetails.*;
 
 public class DoctorDaoImpl implements DoctorDao {
 
@@ -27,67 +29,57 @@ public class DoctorDaoImpl implements DoctorDao {
 			ResultSet resultSet=statement.executeQuery("select * from appointment");
 			while(resultSet.next()) {
 				int id=resultSet.getInt("id");
+				int patientId = resultSet.getInt("patient_id");
 				int doctorID=resultSet.getInt("doctor_id");
 				int slotId=resultSet.getInt("slot_id");
-				Appointment appointment=new Appointment(id,0,doctorID,slotId);
+				Appointment appointment=new Appointment(id,patientId,doctorID,slotId);
 				appointments.add(appointment);
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return appointments;
 	}
 
 	@Override
-	public Doctor getScheduleById(int id) {
-		
-		return null;
-	}
-
-	@Override
-	public List<Slot> displaySlots() {
-		List<Slot> slots=new ArrayList<Slot>();
-//		Connection connection=null;
+	public List<Appointment> getScheduleById(int doctorId) {
+		List<Appointment> appointments=new ArrayList<Appointment>();
 		Statement statement=null;
 		try(Connection connection=DriverManager.getConnection(jdbcConnection, jdbcUser, jdbcPassword);){
 			statement=connection.createStatement();
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			ResultSet resultSet=statement.executeQuery("select * from slot");
+			ResultSet resultSet=statement.executeQuery("select * from appointment where doctor_id = " + doctorId);
 			while(resultSet.next()) {
 				int id=resultSet.getInt("id");
-				Time from=(Time) resultSet.getObject("from");
-				Time to=(Time) resultSet.getObject("to");
-				Slot slot=new Slot(id,from,to);
-				slots.add(slot);
+				int patientId = resultSet.getInt("patient_id");
+				int doctorID=resultSet.getInt("doctor_id");
+				int slotId=resultSet.getInt("slot_id");
+				Appointment appointment=new Appointment(id,patientId,doctorID,slotId);
+				appointments.add(appointment);
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return slots;
+		return appointments;
 	}
 
 	@Override
-	public boolean selectSlots(int[] arr,int doctorId) {
+	public boolean selectSlots(int appointmentId, int doctorId, int slotId) {
 		int rows=0;
 		PreparedStatement statement=null;
 		try(Connection connection=DriverManager.getConnection(jdbcConnection, jdbcUser, jdbcPassword);){
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			for(int i=0;i<arr.length;i++) {
-				statement=connection.prepareStatement("update appointment set slot_id =? where doctor_id=?");
-				statement.setInt(1,arr[i]);
-				statement.setInt(2, doctorId);
-				rows=statement.executeUpdate();
-			}
+			statement=connection.prepareStatement("update appointment set slot_id =? where doctor_id=? and id = ?");
+			statement.setInt(1,slotId);
+			statement.setInt(2, doctorId);
+			statement.setInt(3, appointmentId);
+			rows=statement.executeUpdate();
 		}
 		catch(Exception e) {
 			System.out.println(e);

@@ -15,26 +15,28 @@ import static persistence.ConnectionDetails.*;
 public class PatientDaoImpl implements PatientDao {
 
 	@Override
-	public boolean patientRegistration(Patient patient) {
+	public int patientRegistration(Patient patient) {
 		
 		PreparedStatement preparedStatement=null;
-		int rows=0;
+		int rows=0, patientId = 0;
 		try(Connection connection= DriverManager.getConnection(jdbcConnection, jdbcUser, jdbcPassword);){
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			preparedStatement=connection.prepareStatement("insert into patient(name, age, gender) values(?,?,?)");
-//			preparedStatement.setInt(1, patient.getPatientId());
 			preparedStatement.setString(1,patient.getPatientName());
 			preparedStatement.setInt(2, patient.getPatientAge());
 			preparedStatement.setString(3, patient.getPatientGender());
 			rows=preparedStatement.executeUpdate();
+			ResultSet rs = preparedStatement.executeQuery("select id from patient order by id desc limit 0, 1");
+			rs.next();
+			patientId = rs.getInt("id");
 		}
 		catch(Exception e) {
 			System.out.println(e);
 		}
 		if(rows>0) {
-			return true;
+			return patientId;
 		}
-		return false;
+		return 0;
 	}
 
 	@Override
@@ -61,16 +63,16 @@ public class PatientDaoImpl implements PatientDao {
 	}
 
 	@Override
-	public boolean selectAppointment(int slotId,int patientid) {
+	public boolean selectAppointment(int patientId, int appointmentId) {
 		
 //		Patient patient=new Patient();
 		int rows=0;
 		PreparedStatement statement=null;
 		try(Connection connection=DriverManager.getConnection(jdbcConnection, jdbcUser, jdbcPassword);){
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			statement=connection.prepareStatement("update appointment set patient_id =? where slot_id=?");
-			statement.setInt(1,patientid);
-			statement.setInt(2, slotId);
+			statement=connection.prepareStatement("update appointment set patient_id =? where id = ?");
+			statement.setInt(1,patientId);
+			statement.setInt(2, appointmentId);
 			rows=statement.executeUpdate();
 		}
 		catch(Exception e) {
