@@ -15,6 +15,4 @@ public class PatientHistory {
 	private String patientHistoryIssue;
 	private LocalDate localDate;
 	private String patientCheckupStatus;
-	
-	
 }

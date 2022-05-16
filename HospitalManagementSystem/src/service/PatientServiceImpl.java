@@ -2,6 +2,7 @@ package service;
 
 import java.util.List;
 
+import entity.Appointment;
 import entity.Doctor;
 import entity.Patient;
 import persistence.PatientDao;
@@ -12,7 +13,7 @@ public class PatientServiceImpl implements PatientService {
 	PatientDao patientDao = new PatientDaoImpl();
 	
 	@Override
-	public boolean registration(Patient patient) {
+	public int registration(Patient patient) {
 		
 		return patientDao.patientRegistration(patient);
 	}
@@ -21,6 +22,18 @@ public class PatientServiceImpl implements PatientService {
 	public List<Doctor> doctorsList() {
 		// TODO Auto-generated method stub
 		return patientDao.doctorList();
+	}
+
+	@Override
+	public List<Appointment> getAvailableSlots(int doctorId) {
+		// TODO Auto-generated method stub
+		return patientDao.getSlots(doctorId);
+	}
+
+	@Override
+	public boolean selectAppointment(int patientId, int appointmentId) {
+		// TODO Auto-generated method stub
+		return patientDao.selectAppointment(patientId, appointmentId);
 	}
 
 }

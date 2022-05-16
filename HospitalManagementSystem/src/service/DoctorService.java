@@ -2,9 +2,10 @@ package service;
 
 import java.util.List;
 
-import entity.Doctor;
+import entity.Appointment;
 
 public interface DoctorService {
-	List<Doctor> getSchedule();
-	
+	List<Appointment> getAllSchedule();
+	List<Appointment> getMySchedule(int id);
+	boolean updateMySlots(int appointmentId, int doctorId, int slotId);
 }
